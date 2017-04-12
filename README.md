@@ -13,5 +13,5 @@ Step 2. Edit geometry.xlsx with geometric parameters to replicate grid of simula
 Step 3. Define postprocessing parameters in bubbles2D.m and run simulation! 
 
 Sample formatted data for 300 time frames is provided in bubblestats2D.txt for better understanding. 
-Whether you have fun with the code or not (debugging!), feel free to reach out to me at abakshi@mit.edu with commends, questions and feedback!
+Whether you have fun with the code or not (debugging!), feel free to reach out to me at abakshi@mit.edu with comments, questions and feedback!
 
