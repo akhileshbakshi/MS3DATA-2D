@@ -1,4 +1,5 @@
-% EDIT 1: variables are tailored for 'bubblestats2D.txt' and 'geometry.xlsx' provided 
+% variables are tailored for 'bubblestats2D.txt' and 'geometry.xlsx' provided 
+% Major Edit 1: func_bubblevelocity has been edited to include minbubbledia, ylim1, ylim2 for better linking 
 
 clear all; clc; 
 
@@ -19,7 +20,7 @@ tstep = 0.01;           % indicates frequency of void fraction data
 bubblefile = 'bubblestats2D.txt';
 printfile = 'bubbles2D'; 
 
-% 4. bubble properties  
+% 4. criteria for bubble detection   
 epgbubble = 0.7;        % identifies bubbles
 mincordlength = 0.01;   % discard bubbles which are very small  
 minCSlength = 0.01;     % to avoid extremely small bubbles (infinite AR)
@@ -30,11 +31,12 @@ minbubbledia = 0.01;    % discard bubbles which are very small
 ysmooth = 1;            % grid is refined based on this factor 
 xsmooth = 1;           
 
-% 5. limits for post processing for isolating bubbles within region of interest
+% 5. criteria for postprocessing of detected bubbles
 ylim1 = 0;  
 ylim2 = ycutoff2; 
 rlim1 = 0; 
-rlim2 = D;             
+rlim2 = D;  
+minbubbledia_vel = 0.02; 
 
 % 6. Statistics for average computations 
 nbinsax = 15;
@@ -44,11 +46,12 @@ nbinsrad = 4;
 [nframes, bubblepropertiestotal] = func_bubbledetection(bubblefile, xsmooth, ysmooth, epgcutoff, epgbubble, mincordlength, minCSlength, minbubbledia, nframes, ycutoff1, ycutoff2);
 % bubblepropertiestotal = [frame#, xmean, ymean, bubble-dia, xmin, xmax, ymin, ymax, AR]
 
-bubblepropertiestotal = func_bubblevelocity(bubblepropertiestotal, tstep, D); 
+bubblepropertiestotal = func_bubblevelocity(bubblepropertiestotal, tstep, D, minbubbledia_vel, ylim1, ylim2); 
 % bubblepropertiestotal = [frame#, xmean, ymean, bubble-dia, xmin, xmax, ymin, ymax, AR, vx, vy]
 % note: bubble velocity in frame i is 0 if
 % (a) total number of bubbles in frame i is not equal to total number of bubbles in frame i+1 (coalescence/splitting/eruption)
 % (b) computed vx and vy are physically unreasonable 
+% increasing minbubledia_vel and choosing [ylim1, ylim2] to exclude small bubbles may improve linking 
 
 % ----------------------------------------------------------------
 % sample for computing average statistics 
