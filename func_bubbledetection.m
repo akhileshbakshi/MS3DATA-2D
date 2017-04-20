@@ -311,8 +311,8 @@ xgeom = zeros(nr*ny*nz,1);
 ygeom = zeros(nr*ny*nz,1);
 cellgeom = linspace(1,nr*ny*nz,nr*ny*nz); 
 
-% the cell ordering must replicate IJK in post-mfix
-% assumes r first, then y, and then theta 
+% cell order must replicate order in which data is written
+% assume x first, then y
 
 for i=1:nr*ny 
     if mod(i,nr)>0
