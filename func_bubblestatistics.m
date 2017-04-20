@@ -113,9 +113,6 @@ bubblediaavg = ((4/pi)*bubblevolavg).^(1/2);
 bubblediaavg_ax = ((4/pi)*bubblevolavg_ax).^(1/2); 
 bubblediaavg_rad = ((4/pi)*bubblevolavg_rad).^(1/2); 
 
-
-% 2D histogram 
-
 bubblestats_2D = [bincenter_2Dr, bincenter_2Dy, nbubbles, bubblediaavg, bubbleCSavg, bubblecordavg, bubbleAR1avg, nbubbles_vel, bubblevxavg, bubblevyavg]; 
 bubblestats_ax = [bincenter_ax, nbubbles_ax, bubblediaavg_ax, bubbleCSavg_ax, bubblecordavg_ax, bubbleAR1avg_ax, nbubbles_vel_ax, bubblevxavg_ax, bubblevyavg_ax]; 
 bubblestats_rad = [bincenter_rad, nbubbles_rad, bubblediaavg_rad, bubbleCSavg_rad, bubblecordavg_rad, bubbleAR1avg_rad, nbubbles_vel_rad, bubblevxavg_rad, bubblevyavg_rad]; 
