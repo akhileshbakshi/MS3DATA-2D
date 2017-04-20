@@ -1,3 +1,5 @@
+% EDIT 1: variables are tailored for 'bubblestats2D.txt' and 'geometry.xlsx' provided 
+
 clear all; clc; 
 
 % 1. Mfix file properties 
