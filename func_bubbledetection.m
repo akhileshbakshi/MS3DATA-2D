@@ -7,23 +7,28 @@ Anet = textscan(fileID, '%f %f %f');
 fclose(fileID);
 Anet = [Anet{1,1} Anet{1,2} Anet{1,3}];
  
-% add fictitious row in A 
-Anet = [Anet; 10000, 10000, 10000];
+frame1 = Anet(1,1);                                         % begin frame numbering from 1 
+Anet(:,1) = Anet(:,1) - frame1 + 1; 
+
+% script to compute nframes based on bubblefile 
+% (executed only if nframes = 0 set by user)
+Anet = [Anet; 100000, 100000, 100000];
 [s1,s2] = ismember(unique(Anet(:,1)),Anet(:,1));
 if nframes==0
     nframes = length(unique(Anet(:,1)))-1;                  % to account for the extra 10000 at the end 
 end
 frameloc = s2; 
 
-[R,nx,H,ny,coarsegridglobal] = func_readgeometry;    % function call is expensive in parfor
+[R,nx,H,ny,coarsegridglobal] = func_readgeometry;           % function call is expensive in parfor
 % coarsegridglobal = [cellgeom, xgeom, ygeom];
+
+% ----------------------------------------------------------------
+% time loop begins 
 
 parfor framei = 1:nframes
 
 framei
 
-% --------------------------------------------------------------
-% If single file used, use this snippet 
 Anet_local = Anet;
 frameloc_local = frameloc; 
 
@@ -33,7 +38,6 @@ A2 = Anet(frameloc(framei):frameloc(framei+1)-1,3);
 epgcoarse = epgcutoff*ones(nx*ny*nz,1); 
 epgcoarse(A1) = A2;                         % replacing epg where epg>epgcutoff
 
-% coarsegrid = [coarsegrid epgcoarse];      % coarsegrid = [cell#, x, y, epg]
 coarsegrid = coarsegridglobal; 
 xcoarse = coarsegrid(:,2); 
 ycoarse = coarsegrid(:,3); 
@@ -46,7 +50,6 @@ ygrid = reshape(ygrid,[],1);
  
 epggrid = griddata(xcoarse,ycoarse,epgcoarse,xgrid,ygrid);
 
-
 % ----------------------------------------------------------------
 % restructuring matrix
 
@@ -56,8 +59,6 @@ deltay = H/(ysmooth*ny-1);
 B = [xgrid ,ygrid, epggrid]; 
 B(isnan(B)) = 0;        % boundary cells have NaN (no interpolation) 
 B = sortrows(B,2);      % sortrpws based on axial location 
-
-% clear xgrid; clear ygrid; clear epggrid;
 
 % ----------------------------------------------------------------
 % checking neighbouring cells for linking 
@@ -157,7 +158,6 @@ dispute = [B(:,5:6), B(:,6) > 0];
 TF = dispute(:,end)<1; dispute(TF,:)=[];    % keep only dispute cases
 
 % get unqiue ID of combination (assume max 9999 disputes allowed) 
-
 dispute(:,3) = []; 
 dispute = sort(dispute,2,'descend'); 
 dispute(:,3) = dispute(:,1)*10^4 + dispute(:,2);
@@ -209,7 +209,6 @@ end
 % B = [x y neighbour#1 neighbour#2 bubble#1 bubble#2 interface]
 % dispute combination = [newvalue oldvalue conflict] 
 
-
 % change B from highest dispute case e.g. 19->10 & 10->5 => 19->5 
  
 for i=length(disputecombination(:,1)):-1:1
@@ -223,9 +222,10 @@ end
 B(:,6)=[];
 B = sortrows(B,5);
 B(:,3:4) = [];   
-
-% B = [x y bubble#1 interface]   
-
+ 
+% ----------------------------------------------------------------
+% B = [x y bubble#1 interface]  
+% compute bubble properties 
 bubbleproperties = func_bubbleproperties(B(:,1:3), deltax, deltay); 
 % bubbleproperties = [bubble#, xmean, ymean, Area, xmin, xmax, ymin, ymax, AR]
 bubbleproperties(:,4) = (4*bubbleproperties(:,4)/pi).^0.5; 
@@ -240,10 +240,12 @@ bubblepropertiestotal = [bubblepropertiestotal; bubbleproperties];
 % bubblepropertiestotal = [frame#, xmean, ymean, bubble-dia, xmin, xmax, ymin, ymax, AR]
 
 end
-bubblepropertiestotal(1,:) = []; 
 
+bubblepropertiestotal(1,:) = [];          % remove first row of zeros 
 TF1 = bubblepropertiestotal(:,8) > ycutoff2 | bubblepropertiestotal(:,7) < ycutoff1 ; 
 bubblepropertiestotal(TF1,:) = [];        % remove bubbles touching top and bottom of frame      
+% add frame1 to recover original frame numbers 
+bubblepropertiestotal(:,1) = bubblepropertiestotal(:,1) + frame1 - 1; 
 
 end
 
