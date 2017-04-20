@@ -27,7 +27,7 @@ end
 
 % B = [bubble#, frame#, xmean, ymean, bubble-dia, vx, vy, linkedframe, linkedbubble] 
 vxmax = (D/10)/tstep;      
-vymax = 3*0.71*sqrt(9.81.*((4/pi)*B(:,5)).^(1/2));
+vymax = 3*0.71*sqrt(9.81.*B(:,5));
 TF = abs(B(:,6))>vxmax | B(:,7)<0 | B(:,7)>vymax(:);  
 B(TF,6:7) = 0;  
 
