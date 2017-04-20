@@ -12,7 +12,7 @@ ycutoff1 =  0.004;      % minimum domain y-extremity
                         % domain extremeties are required to remove ambiguous bubbles (touching freeboard and distributor) 
 
 % 2. Modify Geometry.xlsx and enter other simulation data
-D = 0.3;                % this is the bed diameter (kept R to preserve nomenclature with cylindrical 3D) 
+D = 0.3;                % bed diameter 
 tstep = 0.01;           % indicates frequency of void fraction data 
 
 % 3. input/output files names 
@@ -39,7 +39,7 @@ rlim2 = D;
 minbubbledia_vel = 0.02; 
 
 % 6. Statistics for average computations 
-nbinsax = 15;
+nbinsax = 10;
 nbinsrad = 4; 
 
 % ----------------------------------------------------------------
