@@ -37,7 +37,6 @@ rlim2 = D;
 % 6. Statistics for average computations 
 nbinsax = 15;
 nbinsrad = 4; 
-nbinspdf = 20; 
 
 % ----------------------------------------------------------------
 [nframes, bubblepropertiestotal] = func_bubbledetection(bubblefile, xsmooth, ysmooth, epgcutoff, epgbubble, mincordlength, minCSlength, minbubbledia, nframes, ycutoff1, ycutoff2);
