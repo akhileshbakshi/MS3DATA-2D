@@ -1,4 +1,4 @@
-function [bubblestats_2D, bubblestats_ax, bubblestats_rad]=func_bubblestatistics(B, nframes, nbinsax, nbinsrad, y1,y2, r1, r2)
+function [bubblestats_2D, bubblestats_ax, bubblestats_rad]=func_bubblestatistics(B, nbinsax, nbinsrad, y1,y2, r1, r2)
 
 % bubblepropertiestotal = [frame#, xmean, ymean, bubble-dia, xmin, xmax, ymin, ymax, AR, vx, vy]
 B(:,4) = 0.25*pi*B(:,4).^2; 
