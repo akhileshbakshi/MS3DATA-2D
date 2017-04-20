@@ -7,6 +7,9 @@
 ! jbed = integer(jmax*ybed/ylength). Also use jbed and ybed as y-
 ! variables in geometry.xlsx 
 
+! EDIT1: For MFiX users: you need to compile this file with postmfix
+! Next, invoke postmfix, enter option 4, then 4 again and then enter tstart, tend and jbed 
+
       SUBROUTINE SOL_FLUX
 
       Use param
