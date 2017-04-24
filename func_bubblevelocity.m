@@ -1,5 +1,19 @@
 function [B]=func_bubblevelocity(B, tstep, D, minbubbledia_vel, ylim1, ylim2)
 
+% ----------------------------------------------------------------------
+% this function adds velocity components to the matrix B
+% note: bubble velocity in frame i is 0 if
+% (a) total number of bubbles in frame i is not equal to total number of bubbles in frame i+1 (coalescence/splitting/eruption)
+% (b) computed vx and vy are physically unreasonable 
+
+% Smaller bubbles distort numbering; to improve linking, use larger values for minbubbledia
+% increasing minbubledia_vel and choosing [ylim1, ylim2] to exclude small bubbles may improve linking 
+
+% max bubble velocity constraints are based on observations in visualization
+% the defult setting for vxmax is that a bubble can travel atmost Width/10 in one time-step
+% vymax based on bubble diameter 
+% -----------------------------------------------------------------------
+
 Btemp = B;  
 
 % B = [frame#, xmean, ymean, bubble-dia, xmin, xmax, ymin, ymax, AR1]
