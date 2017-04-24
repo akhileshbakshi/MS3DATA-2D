@@ -1,9 +1,13 @@
 function [bubblestats_2D, bubblestats_ax, bubblestats_rad]=func_bubblestatistics(B, nbinsax, nbinsrad, y1,y2, r1, r2)
 
-% bubblepropertiestotal = [frame#, xmean, ymean, bubble-dia, xmin, xmax, ymin, ymax, AR, vx, vy]
+% ------------------------------------------------------------------------
+% this function aggregates bubbles in spatial bins and computes averages 
+% ------------------------------------------------------------------------
+
+% B = [frame#, xmean, ymean, bubble-dia, xmin, xmax, ymin, ymax, AR, vx, vy]
 B(:,4) = 0.25*pi*B(:,4).^2; 
 
-% bubblepropertiestotal = [frame#, xmean, ymean, area, xmin, xmax, ymin, ymax, AR, vx, vy]
+% B = [frame#, xmean, ymean, area, xmin, xmax, ymin, ymax, AR, vx, vy]
 
 % remove bubbles outside the range specified 
 TF = B(:,3)<y1 | B(:,3)>y2 | abs(B(:,2))<r1 |  abs(B(:,2))>r2 ; 
