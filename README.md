@@ -7,7 +7,7 @@ Bakshi, A., Altantzis, C., Bates, R.B., and Ghoniem, A. F.,"Multiphase-flow Stat
 I would also like to acknowledge the contribution of MIT '19 Anastasiya Bershanska towards Lagrangian tracking of bubbles
 
 Description: 
-MS3DATA is a scalable interphase detection and tracking algorithm. The tool is developed for bubble detection in solid-gas flows using open-source software MFiX, but can be easily extended to other applications of multiphase flow (e.g. detection of air bubbles in liquids, droplets, clusters and so on) as long as a threshold criterion for demarcating interphases is possible. The algorithm is indifferent to the data-source (i.e. experimental or simulation data) as long as data can be output in the format [frame#, cell#, field-var]. This version of the code is for 2D statistics only i.e. statistics in 2D simulations and/or slice-based statistics in 3D simulations. The 3D version of the code will be released soon!
+MS3DATA is a scalable interphase detection and tracking algorithm. The tool is developed for bubble detection in solid-gas flows using open-source software MFiX, but can be easily extended to other applications of multiphase flow (e.g. detection of air bubbles in liquids, droplets, clusters and so on) as long as a threshold criterion for demarcating interphases is possible. The algorithm is indifferent to the source of data (i.e. experimental or numerical simulations) as long as data is available in format [frame#, cell#, field-var]. This version of the code is for 2D statistics only i.e. statistics in 2D simulations and/or slice-based statistics in 3D simulations. 
 
 Schematic:
 In solid-gas flows, bubbles can be defined as areas with local void fraction > 0.7. The basic schematic of the code is as follows: 
