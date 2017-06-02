@@ -70,7 +70,7 @@ nbinsrad = 4;           % # bins for radial/lateral statistics between [rlim1, r
 % ----------------------------------------------------------------
 % sample for plotting bubbletrace- only possible if lagrangetracking = 1
 
-tracebubblenum = [1 11 14 27];
+tracebubblenum = [9 22 161 165];
 for j=1:length(tracebubblenum)
   switch j 
     case 1; color = 'r';
@@ -81,14 +81,14 @@ for j=1:length(tracebubblenum)
 
   traceindex = find(bubbletrace(:,tracebubblenum(j))); 
   tracebubbles = bubbletrace(traceindex,tracebubblenum(j)); 
-  xscatter = bubblepropertiestotal(tracebubbles,2); yscatter = bubblepropertiestotal(tracebubbles,3); zscatter = bubblepropertiestotal(tracebubbles,4); size = bubblepropertiestotal(tracebubbles,5).^3; 
-  scatter3(xscatter,zscatter,yscatter,2000000*size,color,'LineWidth',1.2);
+  xscatter = bubblepropertiestotal(tracebubbles,2); yscatter = bubblepropertiestotal(tracebubbles,3); size = bubblepropertiestotal(tracebubbles,4).^2; 
+  scatter(xscatter,yscatter,500000*size,color,'LineWidth',1.2);
   xlabel ('x [m]','FontWeight','bold','fontsize',20);
-  zlabel ('y [m]','FontWeight','bold','fontsize',20);
-  ylabel ('z [m]','FontWeight','bold','fontsize',20);
-  xlim([-0.08 0.08]); zlim([0,0.6]); ylim([-0.08 0.08]);
+  ylabel ('y [m]','FontWeight','bold','fontsize',20);
+  xlim([0 0.3]); ylim([0 0.6]);
   hold on;
 end
+
 
 
 
