@@ -237,18 +237,20 @@ B(:,3:4) = [];
 % ----------------------------------------------------------------
 % B = [x y bubble#1 interface]  
 % compute bubble properties 
-bubbleproperties = func_bubbleproperties(B(:,1:3), deltax, deltay); 
-% bubbleproperties = [bubble#, xmean, ymean, Area, xmin, xmax, ymin, ymax, AR]
-bubbleproperties(:,4) = (4*bubbleproperties(:,4)/pi).^0.5; 
-TF1 = bubbleproperties(:,8)-bubbleproperties(:,7)<mincordlength; 
-TF2 = bubbleproperties(:,6)-bubbleproperties(:,5)<minCSlength;
-TF3 = bubbleproperties(:,4)<minbubbledia; 
-bubbleproperties(TF1 | TF2 | TF3,:) = []; 
+if ~isempty(B) 
+     bubbleproperties = func_bubbleproperties(B(:,1:3), deltax, deltay); 
+     % bubbleproperties = [bubble#, xmean, ymean, Area, xmin, xmax, ymin, ymax, AR]
+     bubbleproperties(:,4) = (4*bubbleproperties(:,4)/pi).^0.5; 
+     TF1 = bubbleproperties(:,8)-bubbleproperties(:,7)<mincordlength; 
+     TF2 = bubbleproperties(:,6)-bubbleproperties(:,5)<minCSlength;
+     TF3 = bubbleproperties(:,4)<minbubbledia; 
+     bubbleproperties(TF1 | TF2 | TF3,:) = []; 
 
-% the first column now gets frame number 
-bubbleproperties(:,1) = framei;
-bubblepropertiestotal = [bubblepropertiestotal; bubbleproperties];
-% bubblepropertiestotal = [frame#, xmean, ymean, bubble-dia, xmin, xmax, ymin, ymax, AR]
+     % the first column now gets frame number 
+     bubbleproperties(:,1) = framei;
+     bubblepropertiestotal = [bubblepropertiestotal; bubbleproperties];
+     % bubblepropertiestotal = [frame#, xmean, ymean, bubble-dia, xmin, xmax, ymin, ymax, AR]
+end 
 
 end
 
