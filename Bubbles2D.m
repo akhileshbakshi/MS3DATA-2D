@@ -1,7 +1,3 @@
-% variables are tailored for 'bubblestats2D.txt' and 'geometry.xlsx' provided 
-% Major Edit 1: func_bubblevelocity has been edited to include minbubbledia_vel, ylim1, ylim2 for better linking 
-% Major Edit 2: option lagrangetracking has been added where bubbles are individually tracked through frames 
-
 clear all; clc; 
 
 % 1. Mfix file properties 
